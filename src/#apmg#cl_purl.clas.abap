@@ -91,7 +91,7 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
     SPLIT list AT ',' INTO TABLE DATA(known_types).
 
     FIND value IN TABLE known_types RESPECTING CASE.
-    result = boolc( sy-subrc = 0 ).
+    result = xsdbool( sy-subrc = 0 ).
 
   ENDMETHOD.
 
@@ -132,8 +132,8 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
       RAISE EXCEPTION TYPE /apmg/cx_error_text EXPORTING text = 'Invalid purl: Missing parts'.
     ENDIF.
 
-    READ TABLE parts INTO components-type INDEX 1.
-    READ TABLE parts INTO DATA(name_version) INDEX lines( parts ).
+    READ TABLE parts INTO components-type INDEX 1 ##SUBRC_OK.
+    READ TABLE parts INTO DATA(name_version) INDEX lines( parts ) ##SUBRC_OK.
 
     LOOP AT parts INTO DATA(part) FROM 2 TO lines( parts ) - 1.
       IF components-namespace IS NOT INITIAL.
@@ -182,7 +182,7 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
 
     type_specifics( CHANGING components = components ).
 
-    CREATE OBJECT result EXPORTING components = components.
+    result = NEW #( components ).
 
   ENDMETHOD.
 
@@ -211,8 +211,7 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
         components-namespace = to_lower( components-namespace ).
         components-name      = to_lower( components-name ).
       WHEN 'conan'.
-        READ TABLE components-qualifiers WITH KEY key = 'channel' TRANSPORTING NO FIELDS.
-        IF sy-subrc = 0 AND components-namespace IS INITIAL.
+        IF line_exists( components-qualifiers[ key = 'channel' ] ) AND components-namespace IS INITIAL.
           RAISE EXCEPTION TYPE /apmg/cx_error_text
             EXPORTING
               text = 'Invalid purl: Namespace is required with channel qualifier for conan'.
@@ -229,7 +228,7 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
                 text = 'Invalid purl: Module name must not contain "-" for cpan'.
           ENDIF.
         ELSE.
-          IF components-namespace <> to_upper( components-namespace ).
+          IF to_upper( components-namespace ) <> components-namespace.
             RAISE EXCEPTION TYPE /apmg/cx_error_text
               EXPORTING
                 text = 'Invalid purl: Distribution name must be upper case for cpan'.
@@ -259,7 +258,11 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
           components-name = to_lower( components-name ).
         ENDIF.
       WHEN 'pypi'.
-        components-name = replace( val = to_lower( components-name ) sub = '_' with = '-' occ = 0 ).
+        components-name = replace(
+          val  = to_lower( components-name )
+          sub  = '_'
+          with = '-'
+          occ  = 0 ).
       WHEN 'swift'.
         IF components-namespace IS INITIAL.
           RAISE EXCEPTION TYPE /apmg/cx_error_text
