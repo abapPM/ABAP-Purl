@@ -1,7 +1,7 @@
-![Version](https://img.shields.io/endpoint?url=https://shield.abappm.com/github/abapPM/ABAP-Purl/src/zcl_purl.clas.abap/c_version&label=Version&color=blue)
+![Version](https://img.shields.io/endpoint?url=https://shield.abappm.com/github/abapPM/ABAP-Purl/src/%2523apmg%2523cl_purl.clas.abap/c_version&label=Version&color=blue)
 
 [![License](https://img.shields.io/github/license/abapPM/ABAP-Purl?label=License&color=success)](https://github.com/abapPM/ABAP-Purl/blob/main/LICENSE)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?color=success)](https://github.com/abapPM/.github/blob/main/CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%2520Covenant-2.1-4baaaa.svg?color=success)](https://github.com/abapPM/.github/blob/main/CODE_OF_CONDUCT.md)
 [![REUSE Status](https://api.reuse.software/badge/github.com/abapPM/ABAP-Purl)](https://api.reuse.software/info/github.com/abapPM/ABAP-Purl)
 
 # PURL
