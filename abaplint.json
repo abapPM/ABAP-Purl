@@ -135,7 +135,9 @@
       "count": 3
     },
     "line_break_style": true,
-    "line_length": true,
+    "line_length": {
+      "exclude": ["#apmg#cl_purl.testclasses.clas.abap"]
+    },
     "line_only_punc": true,
     "local_class_naming": true,
     "local_testclass_consistency": true,
@@ -180,7 +182,7 @@
       "aqqu": "^Z",
       "aqsg": "^Z",
       "auth": "^Z",
-      "clas": "^ZC(L|X)\\_",
+      "clas": "^/APMG/C(L|X)_PURL",
       "cmod": "^Z",
       "doma": "^Z",
       "dtel": "^Z",
@@ -192,7 +194,7 @@
       "idoc": "^Z",
       "ignoreNames": [],
       "ignorePatterns": [],
-      "intf": "^ZIF\\_",
+      "intf": "^/APMG/IF_PURL",
       "msag": "^Z",
       "patternKind": "required",
       "pinf": "^Z",
@@ -279,7 +281,7 @@
     "xml_consistency": true
   },
   "syntax": {
-    "errorNamespace": "^(Z|Y|LCL_|TY_|LIF_)",
+    "errorNamespace": "^(/APMG/|LCL_|TY_|LIF_)",
     "globalConstants": [],
     "globalMacros": [],
     "version": "v750"
