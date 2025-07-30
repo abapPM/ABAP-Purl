@@ -807,9 +807,8 @@ CLASS ltcl_purl IMPLEMENTATION.
       TRY.
           DATA(msg) = |{ sy-tabix }: { p-description }: |.
 
-          IF sy-tabix = 99.
-            BREAK-POINT.
-          ENDIF.
+          " So many?
+          ASSERT sy-tabix < 100.
 
           DATA(purl) = /apmg/cl_purl=>parse( p-purl ).
 
