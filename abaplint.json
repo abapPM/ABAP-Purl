@@ -154,7 +154,9 @@
     "max_one_statement": true,
     "message_exists": true,
     "method_implemented_twice": true,
-    "method_length": true,
+    "method_length": {
+      "exclude": ["#apmg#cl_purl.testclasses.clas.abap"]
+    },      
     "method_overwrites_builtin": true,
     "method_parameter_names": false,
     "mix_returning": true,
