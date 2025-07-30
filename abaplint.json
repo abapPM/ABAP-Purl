@@ -42,6 +42,7 @@
         "CLAS",
         "DEVC",
         "INTF",
+        "NSPC",
         "PROG"
       ]
     },
