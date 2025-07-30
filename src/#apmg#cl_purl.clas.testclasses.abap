@@ -596,7 +596,8 @@ CLASS ltcl_purl IMPLEMENTATION.
 
     CLEAR p. " 46
     p-description = 'MLflow model tracked in Azure ML (case sensitive)'.
-    p-purl = 'pkg:mlflow/CreditFraud@3?repository_url=https://westus2.api.azureml.ms/mlflow/v1.0/subscriptions/a50f2011-fab8-4164-af23-c62881ef8c95/resourceGroups/TestResourceGroup/providers/Microsoft.MachineLearningServices/workspaces/TestWorkspace'.
+    p-purl =
+    'pkg:mlflow/CreditFraud@3?repository_url=https://westus2.api.azureml.ms/mlflow/v1.0/subscriptions/a50f2011-fab8-4164-af23-c62881ef8c95/resourceGroups/TestResourceGroup/providers/Microsoft.MachineLearningServices/workspaces/TestWorkspace'.
     p-canonical_purl =
     'pkg:mlflow/CreditFraud@3?repository_url=https://westus2.api.azureml.ms/mlflow/v1.0/subscriptions/a50f2011-fab8-4164-af23-c62881ef8c95/resourceGroups/TestResourceGroup/providers/Microsoft.MachineLearningServices/workspaces/TestWorkspace'.
     p-type = 'mlflow'.
@@ -610,8 +611,10 @@ CLASS ltcl_purl IMPLEMENTATION.
 
     CLEAR p. " 47
     p-description = 'MLflow model with unique identifiers'.
-    p-purl = 'pkg:mlflow/trafficsigns@10?model_uuid=36233173b22f4c89b451f1228d700d49&run_id=410a3121-2709-4f88-98dd-dba0ef056b0a&repository_url=https://adb-5245952564735461.0.azuredatabricks.net/api/2.0/mlflow'.
-    p-canonical_purl = 'pkg:mlflow/trafficsigns@10?model_uuid=36233173b22f4c89b451f1228d700d49&repository_url=https://adb-5245952564735461.0.azuredatabricks.net/api/2.0/mlflow&run_id=410a3121-2709-4f88-98dd-dba0ef056b0a'.
+    p-purl =
+    'pkg:mlflow/trafficsigns@10?model_uuid=36233173b22f4c89b451f1228d700d49&run_id=410a3121-2709-4f88-98dd-dba0ef056b0a&repository_url=https://adb-5245952564735461.0.azuredatabricks.net/api/2.0/mlflow'.
+    p-canonical_purl =
+    'pkg:mlflow/trafficsigns@10?model_uuid=36233173b22f4c89b451f1228d700d49&repository_url=https://adb-5245952564735461.0.azuredatabricks.net/api/2.0/mlflow&run_id=410a3121-2709-4f88-98dd-dba0ef056b0a'.
     p-type = 'mlflow'.
     p-namespace = ''.
     p-name = 'trafficsigns'.
@@ -766,6 +769,34 @@ CLASS ltcl_purl IMPLEMENTATION.
     p-subpath = ''.
     p-is_invalid = abap_true.
     APPEND p TO tests.
+
+    "
+    " apm
+    "
+    CLEAR p. " 90
+    p-description = 'apm'.
+    p-purl = 'pkg:apm/purl@1.2.3'.
+    p-canonical_purl = 'pkg:apm/purl@1.2.3'.
+    p-type = 'apm'.
+    p-namespace = ''.
+    p-name = 'purl'.
+    p-version = '1.2.3'.
+    p-subpath = ''.
+    p-is_invalid = abap_false.
+    APPEND p TO tests.
+
+    CLEAR p. " 91
+    p-description = 'apm can be scoped'.
+    p-purl = 'pkg:apm/%40apm/settings@1.2.3'.
+    p-canonical_purl = 'pkg:apm/%40apm/settings@1.2.3'.
+    p-type = 'apm'.
+    p-namespace = '@apm'.
+    p-name = 'settings'.
+    p-version = '1.2.3'.
+    p-subpath = ''.
+    p-is_invalid = abap_false.
+    APPEND p TO tests.
+
 
   ENDMETHOD.
 

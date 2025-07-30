@@ -82,9 +82,9 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
 
   METHOD is_valid_type.
 
-    " https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst
+    " https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst + apm :-)
 
-    DATA(list) = `alpm,apk,bitbucket,bitnami,cocoapods,cargo,composer,conan,conda,cpan,cran,deb,docker,`
+    DATA(list) = `alpm,apk,apm,bitbucket,bitnami,cocoapods,cargo,composer,conan,conda,cpan,cran,deb,docker,`
       & `gem,generic,github,golang,hackage,hex,huggingface,luarocks,maven,mlflow,npm,nuget,qpkg,oci,pub,`
       & `pypi,rpm,swid,swift`.
 
@@ -158,7 +158,7 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
       RAISE EXCEPTION TYPE /apmg/cx_error_text EXPORTING text = 'Invalid purl: Name is required'.
     ENDIF.
 
-    components-qualifiers = zcl_url_params=>parse( url->components-query )->params.
+    components-qualifiers = /apmg/cl_url_params=>parse( url->components-query )->params.
 
     LOOP AT components-qualifiers ASSIGNING FIELD-SYMBOL(<qualifier>).
       <qualifier>-key = to_lower( <qualifier>-key ).
