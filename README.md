@@ -6,13 +6,53 @@
 
 # PURL
 
-Package "mostly universal" URL
+An implementation of the purl specification aka. a package "mostly universal" URL.
+
+A purl is a URL composed of seven components:
+
+```
+scheme:type/namespace/name@version?qualifiers#subpath
+```
+
+For details, see [Purl Specs](https://github.com/package-url/purl-spec).
 
 NO WARRANTIES, [MIT License](https://github.com/abapPM/ABAP-Purl/blob/main/LICENSE)
 
 ## Usage
 
-...
+Get the components of a purl:
+
+```abap
+DATA(purl) = /apmg/cl_purl=>parse( 'pkg:apm/foobar@1.2.3' ).
+
+" purl->components-...
+" schema  = 'pkg'
+" type    = 'apm'
+" name    = 'foobar'
+" version = '1.2.3'
+```
+
+Format components into a purl:
+
+```abap
+DATA(components) = VALUE /apmg/cl_purl=>ty_purl_components(
+  schema  = 'pkg'
+  type    = 'apm'
+  name    = 'foobar'
+  version = '1.2.3' ).
+
+DATA(url) = /apmg/cl_purl=>serialize( components ).
+
+" url = 'pkg:apm/foobar@1.2.3' 
+```
+
+Validate a schema:
+
+```abap
+IF /apmg/cl_purl=>is_valid_schema( 'apm' ) = abap_true.
+  " yay!
+ENDIF.
+```
 
 ## Prerequisites
 
