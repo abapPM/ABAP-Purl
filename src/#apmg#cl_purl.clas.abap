@@ -211,11 +211,13 @@ CLASS /apmg/cl_purl IMPLEMENTATION.
         components-namespace = to_lower( components-namespace ).
         components-name      = to_lower( components-name ).
       WHEN 'conan'.
-        IF line_exists( components-qualifiers[ key = 'channel' ] ) AND components-namespace IS INITIAL.
-          RAISE EXCEPTION TYPE /apmg/cx_error_text
-            EXPORTING
-              text = 'Invalid purl: Namespace is required with channel qualifier for conan'.
-        ELSEIF sy-subrc <> 0 AND components-namespace IS NOT INITIAL.
+        IF components-namespace IS INITIAL.
+          IF line_exists( components-qualifiers[ key = 'channel' ] ).
+            RAISE EXCEPTION TYPE /apmg/cx_error_text
+              EXPORTING
+                text = 'Invalid purl: Namespace is required with channel qualifier for conan'.
+          ENDIF.
+        ELSEIF components-qualifiers IS INITIAL.
           RAISE EXCEPTION TYPE /apmg/cx_error_text
             EXPORTING
               text = 'Invalid purl: Channel qualifier is required with namespace for conan'.

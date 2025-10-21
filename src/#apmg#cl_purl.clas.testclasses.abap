@@ -710,17 +710,7 @@ CLASS ltcl_purl IMPLEMENTATION.
     p-is_invalid = abap_false.
     APPEND p TO tests.
 
-    CLEAR p. " 55 - note: bintray is not an approved valid type
-    p-description = 'ensure namespace allows multiple segments'.
-    p-purl = 'pkg:bintray/apache/couchdb/couchdb-mac@2.3.0'.
-    p-canonical_purl = 'pkg:bintray/apache/couchdb/couchdb-mac@2.3.0'.
-    p-type = 'bintray'.
-    p-namespace = 'apache/couchdb'.
-    p-name = 'couchdb-mac'.
-    p-version = '2.3.0'.
-    p-subpath = ''.
-    p-is_invalid = abap_false.
-    APPEND p TO tests.
+    " 55 - note: bintray is has been deprecated
 
     CLEAR p. " 56
     p-description = 'invalid encoded colon : between scheme and type'.
@@ -803,7 +793,7 @@ CLASS ltcl_purl IMPLEMENTATION.
   METHOD test.
 
     " Note: bintray is not an approved type so we exclude it
-    LOOP AT tests INTO p WHERE type <> 'bintray'.
+    LOOP AT tests INTO p.
       TRY.
           DATA(msg) = |{ sy-tabix }: { p-description }: |.
 
